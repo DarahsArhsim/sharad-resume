@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sharad Mishra - Senior Technical Writer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <!-- Visualization & Content Choices:
+        - Contact: Goal: Inform. Method: List with icons (Font Awesome). Interaction: Clickable links. Justification: Standard, accessible.
+        - Summary: Goal: Inform. Method: Text block. Justification: Direct presentation.
+        - Skills: Goal: Inform/Organize. Method: Categorized lists (HTML/Tailwind). Justification: Clear and scannable.
+        - Experience: Goal: Show progression/details. Method: Interactive vertical timeline (HTML/CSS/JS) with expandable cards for each role. Key achievements (e.g., "30+ documents") will be bolded. Justification: Visually engaging, allows users to explore details on demand.
+        - Education/Certs: Goal: Inform. Method: Lists. Justification: Standard.
+        - NO Chart.js/Plotly needed for this design, focusing on HTML/CSS/JS for the timeline.
+        - CONFIRMING NO SVG/Mermaid. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif; /* Assuming Inter is available or falls back to sans-serif */
+        }
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #1f2937; /* Tailwind gray-800 */
+                color: #f3f4f6; /* Tailwind gray-100 */
+            }
+            .bg-stone-100 { background-color: #374151; /* Tailwind gray-700 */ }
+            .bg-white { background-color: #1f2937; /* Tailwind gray-800 */ }
+            .text-gray-700 { color: #d1d5db; /* Tailwind gray-300 */ }
+            .text-gray-800 { color: #f3f4f6; /* Tailwind gray-100 */ }
+            .text-gray-600 { color: #9ca3af; /* Tailwind gray-400 */ }
+            .text-teal-600 { color: #2dd4bf; /* Tailwind teal-400 */ }
+            .border-gray-300 { border-color: #4b5563; /* Tailwind gray-600 */ }
+            .hover\:bg-teal-500:hover { background-color: #14b8a6; /* Tailwind teal-600 */ }
+            .shadow-lg { box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3), 0 4px 6px -2px rgba(0,0,0,0.15); }
+            .timeline-item::before {
+                background-color: #2dd4bf; /* Tailwind teal-400 */
+            }
+            .timeline-line {
+                 background-color: #4b5563; /* Tailwind gray-600 */
+            }
+        }
+        .smooth-scroll { scroll-behavior: smooth; }
+        .timeline-line {
+            position: absolute;
+            left: 19px; /* Adjust to center with the dot */
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: #cbd5e1; /* Tailwind slate-300 */
+            z-index: 0;
+        }
+        .timeline-item {
+            position: relative;
+            padding-left: 40px; /* Space for the line and dot */
+            margin-bottom: 2rem;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 12px; /* Adjust to center */
+            top: 5px; /* Adjust vertical alignment */
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: #0d9488; /* Tailwind teal-600 */
+            border: 2px solid #f8fafc; /* Tailwind slate-50 */
+            z-index: 1;
+        }
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+        .section-active {
+            color: #0d9488; /* Tailwind teal-600 */
+            font-weight: 600;
+        }
+        .nav-link {
+            transition: all 0.3s ease;
+        }
+        .nav-link:hover {
+            color: #0d9488; /* Tailwind teal-600 */
+            transform: translateX(5px);
+        }
+        .fade-in {
+            animation: fadeInAnimation 0.5s ease-in-out;
+        }
+        @keyframes fadeInAnimation {
+            0% { opacity: 0; transform: translateY(10px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+    <script>
+        if (typeof TailwindCSS === 'undefined' && document.documentElement.style.getPropertyValue('--color-primary') === '') {
+            const link = document.createElement('link');
+            link.href = 'https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css';
+            link.rel = 'stylesheet';
+            document.head.appendChild(link);
+        }
+    </script>
+</head>
+<body class="bg-stone-100 text-gray-800 smooth-scroll leading-relaxed">
+
+    <div class="flex flex-col md:flex-row min-h-screen">
+        <nav class="md:w-64 bg-white md:h-screen md:fixed shadow-lg p-6 space-y-4 md:space-y-6 order-first md:order-none">
+            <div class="text-center mb-8">
+                <h1 class="text-2xl font-bold text-teal-600">Sharad Mishra</h1>
+                <p class="text-sm text-gray-600">Senior Technical Writer</p>
+            </div>
+            <ul class="space-y-2">
+                <li><a href="#summary" class="nav-link block py-2 px-3 rounded-md text-gray-700 hover:bg-teal-50 hover:text-teal-600">Summary</a></li>
+                <li><a href="#skills" class="nav-link block py-2 px-3 rounded-md text-gray-700 hover:bg-teal-50 hover:text-teal-600">Skills</a></li>
+                <li><a href="#experience" class="nav-link block py-2 px-3 rounded-md text-gray-700 hover:bg-teal-50 hover:text-teal-600">Experience</a></li>
+                <li><a href="#education" class="nav-link block py-2 px-3 rounded-md text-gray-700 hover:bg-teal-50 hover:text-teal-600">Education</a></li>
+                <li><a href="#certifications" class="nav-link block py-2 px-3 rounded-md text-gray-700 hover:bg-teal-50 hover:text-teal-600">Certifications</a></li>
+                <li><a href="#contact" class="nav-link block py-2 px-3 rounded-md text-gray-700 hover:bg-teal-50 hover:text-teal-600">Contact</a></li>
+            </ul>
+            <div class="mt-auto pt-6 border-t border-gray-300 text-center text-xs text-gray-500">
+                Interactive Resume SPA
+            </div>
+        </nav>
+
+        <main class="flex-1 md:ml-64 p-6 md:p-10 space-y-12">
+            
+            <section id="summary" class="pt-10 fade-in">
+                <div class="bg-white p-8 rounded-lg shadow-lg">
+                    <h2 class="text-3xl font-bold text-teal-600 mb-4">Summary</h2>
+                    <p class="text-gray-700 text-lg mb-2">
+                        Highly accomplished Senior Technical Writer with <strong>7.5+ years of experience</strong> across publishing, ed-tech, software development, EDA, and IT industries.
+                    </p>
+                    <p class="text-gray-700">
+                        Proven ability to own end-to-end product documentation, streamline processes through automation, and effectively communicate complex technical concepts. Passionate about leveraging new technologies, including <strong>Generative AI</strong>, to enhance documentation quality and efficiency.
+                    </p>
+                    <div class="mt-6 text-gray-700">
+                        <p>This interactive resume provides a dynamic overview of my career. Use the navigation on the left to explore different sections, including my skills, a detailed timeline of my professional experience, education, and certifications.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="skills" class="pt-10 fade-in">
+                <div class="bg-white p-8 rounded-lg shadow-lg">
+                    <h2 class="text-3xl font-bold text-teal-600 mb-6">Core Competencies & Tools</h2>
+                    <p class="text-gray-700 mb-6">I possess a diverse skill set encompassing various authoring tools, version control systems, and technical methodologies, enabling me to deliver high-quality documentation efficiently.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-700 mb-2">Authoring</h3>
+                            <ul class="list-disc list-inside text-gray-600 space-y-1">
+                                <li>Adobe FrameMaker</li>
+                                <li>Microsoft Word</li>
+                                <li>VS Code</li>
+                                <li>Notepad++</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-700 mb-2">Version Control</h3>
+                            <ul class="list-disc list-inside text-gray-600 space-y-1">
+                                <li>Perforce</li>
+                                <li>GitLab</li>
+                                <li>GitHub</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-700 mb-2">Illustration</h3>
+                            <ul class="list-disc list-inside text-gray-600 space-y-1">
+                                <li>SnagIt</li>
+                                <li>Camtasia</li>
+                                <li>MS Visio</li>
+                                <li>Draw.io</li>
+                                <li>MS PowerPoint</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-700 mb-2">Management</h3>
+                            <ul class="list-disc list-inside text-gray-600 space-y-1">
+                                <li>Jira</li>
+                                <li>Confluence</li>
+                                <li>MS Excel</li>
+                                <li>MS SharePoint</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-700 mb-2">Methodologies</h3>
+                            <ul class="list-disc list-inside text-gray-600 space-y-1">
+                                <li>Doc-as-Code</li>
+                                <li>DITA</li>
+                                <li>Agile Development</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-700 mb-2">Programming/Scripting</h3>
+                            <ul class="list-disc list-inside text-gray-600 space-y-1">
+                                <li>Python, C, C++, C#, Java</li>
+                                <li>Markdown, HTML, CSS, XML</li>
+                                <li>JavaScript, JSON, SQL</li>
+                                <li>Shell/Bash Scripting</li>
+                                <li>SystemVerilog</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="experience" class="pt-10 fade-in">
+                <div class="bg-white p-8 rounded-lg shadow-lg">
+                    <h2 class="text-3xl font-bold text-teal-600 mb-6">Professional Experience</h2>
+                    <p class="text-gray-700 mb-8">My career journey reflects a consistent growth in responsibilities and impact, particularly in automating processes and delivering user-centric documentation. Below is a timeline of my key roles and accomplishments.</p>
+                    <div class="relative">
+                        <div class="timeline-line hidden md:block"></div>
+                        <div id="experience-timeline" class="space-y-8">
+                            </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="education" class="pt-10 fade-in">
+                <div class="bg-white p-8 rounded-lg shadow-lg">
+                    <h2 class="text-3xl font-bold text-teal-600 mb-6">Education</h2>
+                     <p class="text-gray-700 mb-6">My academic background in computer applications provides a strong foundation for my technical writing career.</p>
+                    <div class="space-y-4">
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-700">Master of Computer Application (MCA)</h3>
+                            <p class="text-gray-600">Indira Gandhi National Open University</p>
+                            <p class="text-sm text-gray-500">Dec 2014 – June 2019</p>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-700">Bachelor of Science (B.Sc.)</h3>
+                            <p class="text-gray-600">Delhi University</p>
+                            <p class="text-sm text-gray-500">2011 – May 2014</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="certifications" class="pt-10 fade-in">
+                <div class="bg-white p-8 rounded-lg shadow-lg">
+                    <h2 class="text-3xl font-bold text-teal-600 mb-6">Certifications</h2>
+                    <p class="text-gray-700 mb-6">I am committed to continuous learning and professional development, as demonstrated by these certifications.</p>
+                    <ul class="list-disc list-inside text-gray-600 space-y-2">
+                        <li>Business Writing – University of Colorado Boulder (Coursera)</li>
+                        <li>How to Research and Write Using Generative AI Tools – LinkedIn Learning</li>
+                        <li>Foundation of Project Management – Google (Coursera)</li>
+                        <li>Linux: Bash Shell and Scripts – LinkedIn Learning</li>
+                        <li>JSON and XML for Writers – Udemy</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="contact" class="pt-10 fade-in">
+                 <div class="bg-white p-8 rounded-lg shadow-lg">
+                    <h2 class="text-3xl font-bold text-teal-600 mb-6">Get In Touch</h2>
+                    <p class="text-gray-700 mb-6">I'm always open to discussing new opportunities or collaborations. Feel free to reach out through any of the channels below.</p>
+                    <div class="space-y-3 text-gray-700">
+                        <p><i class="fas fa-phone mr-2 text-teal-600"></i> <a href="tel:+919718007758" class="hover:text-teal-500">+91-9718007758</a></p>
+                        <p><i class="fas fa-envelope mr-2 text-teal-600"></i> <a href="mailto:sharad.mishra7758@gmail.com" class="hover:text-teal-500">sharad.mishra7758@gmail.com</a></p>
+                        <p><i class="fab fa-linkedin mr-2 text-teal-600"></i> <a href="https://www.linkedin.com/in/sharad-mishra-a6b6b7132/" target="_blank" rel="noopener noreferrer" class="hover:text-teal-500">Sharad Mishra | LinkedIn</a></p>
+                        <p><i class="fas fa-briefcase mr-2 text-teal-600"></i> <a href="#" id="workSamplesLink" class="hover:text-teal-500">Work Samples</a> (Please update link)</p>
+                    </div>
+                </div>
+            </section>
+            
+            <footer class="text-center py-8 text-gray-600 text-sm">
+                <p>&copy; <span id="currentYear"></span> Sharad Mishra. All rights reserved.</p>
+                <p>Built with Tailwind CSS & JavaScript.</p>
+            </footer>
+
+        </main>
+    </div>
+
+    <script>
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+        
+        // Work Samples Link - Placeholder behavior
+        const workSamplesLink = document.getElementById('workSamplesLink');
+        if (workSamplesLink) {
+            workSamplesLink.addEventListener('click', function(event) {
+                event.preventDefault();
+                // In a real scenario, this would be the actual link.
+                // For now, it's a placeholder.
+                alert('Please update the Work Samples link in the HTML.');
+            });
+        }
+
+        const experienceData = [
+            {
+                role: "Senior Technical Writer",
+                company: "Thales DIS Technologies, Noida",
+                period: "Feb 2024 – Present",
+                achievements: [
+                    "Automated documentation tasks using <strong>Python scripts</strong>, significantly improving efficiency.",
+                    "Delivered comprehensive documentation sets for two <strong>SaaS cybersecurity products</strong>.",
+                    "Trained technical writers in <strong>prompt engineering using Generative AI models</strong>."
+                ]
+            },
+            {
+                role: "Technical Writer",
+                company: "Siemens EDA, Noida",
+                period: "June 2022 – Feb 2024 (1 year 8 months)",
+                achievements: [
+                    "Authored and delivered <strong>30+ new documents</strong> (user guides, datasheets, application notes).",
+                    "Developed <strong>Python scripts and cron jobs</strong> to automate redundant documentation processes, saving substantial man-hours."
+                ]
+            },
+            {
+                role: "Technical Writer",
+                company: "Highlands Infotech, Noida",
+                period: "February 2021 – June 2022 (1 year 4 months)",
+                achievements: [
+                    "Created <strong>50+ knowledge base articles</strong> explaining product workflows and troubleshooting.",
+                    "Collaboratively developed an <strong>intuitive Technical Support System</strong> for basic software troubleshooting, significantly reducing help tickets."
+                ]
+            },
+            {
+                role: "Quality Analyst",
+                company: "Trivium Education Services, Delhi",
+                period: "October 2018 – February 2021 (2 years 4 months)",
+                achievements: [
+                    "Authored <strong>500+ textbook solutions</strong> in Computer Science and Mathematics.",
+                    "Designed standard templates for e-learning platform publishing, contributing to <strong>securing key client contracts</strong>."
+                ]
+            },
+            {
+                role: "Technical Content Writer",
+                company: "Rio Learning & Technologies, Delhi",
+                period: "July 2018 – October 2018 (3 months)",
+                achievements: [
+                    "Developed curriculum and comprehensive content for graduate certificate programs."
+                ]
+            },
+            {
+                role: "Content Developer",
+                company: "DreamTech Press, Delhi",
+                period: "July 2017 – May 2018 (10 months)",
+                achievements: [
+                    "Collaborated to introduce <strong>QR codes in textbooks</strong>, providing supplementary video-based content to readers."
+                ]
+            }
+        ];
+
+        const timelineContainer = document.getElementById('experience-timeline');
+        if (timelineContainer) {
+            experienceData.forEach(item => {
+                const timelineItem = document.createElement('div');
+                timelineItem.className = 'timeline-item';
+                
+                let achievementsHTML = item.achievements.map(ach => `<li>${ach}</li>`).join('');
+
+                timelineItem.innerHTML = `
+                    <div class="bg-slate-50 p-6 rounded-md shadow-md hover:shadow-xl transition-shadow duration-300">
+                        <h3 class="text-xl font-semibold text-gray-800">${item.role}</h3>
+                        <p class="text-md text-teal-600 font-medium">${item.company}</p>
+                        <p class="text-sm text-gray-500 mb-3">${item.period}</p>
+                        <ul class="list-disc list-inside text-gray-600 space-y-1 text-sm">
+                            ${achievementsHTML}
+                        </ul>
+                    </div>
+                `;
+                timelineContainer.appendChild(timelineItem);
+            });
+        }
+
+        // Active navigation link highlighting based on scroll
+        const sections = document.querySelectorAll('main section');
+        const navLinks = document.querySelectorAll('nav ul li a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= (sectionTop - sectionHeight / 3)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('section-active', 'bg-teal-50');
+                if (link.getAttribute('href').substring(1) === current) {
+                    link.classList.add('section-active', 'bg-teal-50');
+                }
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                     const offsetTop = targetElement.offsetTop - 60; // Adjust for fixed header or desired padding
+                     window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Fade in sections on scroll (simple version)
+        const faders = document.querySelectorAll('.fade-in');
+        const appearOptions = {
+            threshold: 0.2, // Trigger when 20% of the element is visible
+            rootMargin: "0px 0px -50px 0px" // Start loading a bit before it's fully in view
+        };
+
+        const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) {
+                    return;
+                } else {
+                    entry.target.classList.add('appeared'); // You can add 'appeared' class for more complex animations
+                    appearOnScroll.unobserve(entry.target);
+                }
+            });
+        }, appearOptions);
+
+        faders.forEach(fader => {
+            appearOnScroll.observe(fader);
+        });
+
+    </script>
+</body>
+</html>
